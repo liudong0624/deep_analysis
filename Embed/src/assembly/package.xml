@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.3
+          http://maven.apache.org/xsd/assembly-1.1.3.xsd">
+    <id>make-assembly</id>
+    <formats>
+        <!--压缩文件的类型-->
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <!--需要包含的文件与输出的路径-->
+        <!--将配置文件打包到jar同级路径-->
+
+        <fileSet>
+            <directory>src/script/</directory>
+            <includes>
+                <include>install.sh</include>
+            </includes>
+            <outputDirectory>.</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>src/script/</directory>
+            <includes>
+                <include>Embedd</include>
+            </includes>
+            <outputDirectory>script</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <!--引入程序的jar-->
+            <directory>target/</directory>
+            <includes>
+                <include>Embed-2.0.jar</include>
+            </includes>
+            <outputDirectory>Embed</outputDirectory>
+        </fileSet>
+    </fileSets>
+
+    <dependencySets>
+        <!--引入程序的依赖jar-->
+        <dependencySet>
+            <!--是否使用程序生成的模块的jar-->
+            <useProjectArtifact>true</useProjectArtifact>
+            <outputDirectory>/lib/</outputDirectory>
+            <unpack>false</unpack>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+</assembly>

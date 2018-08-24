@@ -1,0 +1,72 @@
+{
+  "queueNames": [
+    "deep_analysis",
+    "ocr",
+    "extract",
+    "deep_result",
+    "pcap_analysis",
+    "secret",
+    "keyword",
+    "uncompress",
+    "embed",
+    "error"
+  ],
+  "change": [
+    {
+      "changeName": "datainput",
+      "type": "direct"
+    },
+    {
+      "changeName": "foundation",
+      "type": "direct"
+    },
+    {
+      "changeName": "text",
+      "type": "fanout"
+    }
+  ],
+  "bounds": [
+    {
+      "queueName": "datainput",
+      "changeName": "datainput",
+      "routekey": "datainput"
+    },
+    {
+      "queueName": "detection",
+      "changeName": "foundation",
+      "routekey": "detection"
+    },
+    {
+      "queueName": "ocr",
+      "changeName": "foundation",
+      "routekey": "ocr"
+    },
+    {
+      "queueName": "extract",
+      "changeName": "foundation",
+      "routekey": "extract"
+    },
+    {
+      "queueName": "uncompress",
+      "changeName": "foundation",
+      "routekey": "uncompress"
+    },
+    {
+      "queueName": "embed",
+      "changeName": "foundation",
+      "routekey": "extract"
+    },
+    {
+      "queueName": "index",
+      "changeName": "foundation",
+      "routekey": "index"
+    },
+    {
+      "queueName": "error",
+      "changeName": "foundation",
+      "routekey": "error"
+    }
+  ]
+}
+
+

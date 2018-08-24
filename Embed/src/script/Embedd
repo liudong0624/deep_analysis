@@ -1,0 +1,55 @@
+#!/bin/bash
+#chkconfig:2345 80 50
+#description Embedd
+
+export LANG="zh_CN.UTF-8"
+
+#程序所在目录
+exe_path="/opt/WangAn/Embed/Embed"
+#运行程序的命令
+cmdline="java -jar ./Embed-2.0.jar"
+#模块的名称，供显示
+servname=Embedd
+
+if [ 'root' != `whoami` ]; then
+	echo 'operation need root ,please use [root] or start with [sudo]'  
+	exit 2
+fi
+case $1 in
+start)
+	echo "start $servname service ..."
+	cd ${exe_path}
+	if [ $? != 0 ];then
+		echo "the dir is not exit"
+		exit 2
+	fi
+	#source ./env.sh
+	nohup ${cmdline} >>/dev/nul 2>&1 &
+	;;
+stop)
+	echo "stop $servname service"
+	pids=`ps -ef|grep -w "$cmdline"|grep -v "grep" |awk -F ' ' '{print $2}'`
+	for pid in $pids
+	do
+		kill -9 $pid
+	done
+	;;
+status)
+	echo "check $servname service"
+	pid_num=`ps -ef|grep -w "$cmdline"|grep -v "grep" |wc  -l`
+	if [ $pid_num -gt 0 ];then
+		echo -e  "\033[31m[running]\033[0m"
+		exit 98
+	else
+		echo -e  "\033[31m[stopped]\033[0m"
+		exit 99
+	fi
+	;;
+restart)
+	$0 stop
+	$0 start
+	;;
+*)
+	echo $"Usage: $0 {start|stop|restart|status}"
+	;;
+esac

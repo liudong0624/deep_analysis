@@ -1,0 +1,10 @@
+{
+  "ESHost":"192.168.4.166",
+  "MqPort":50001,
+  "ESPort":"9300",
+  "MqIpHost":"192.168.4.166",
+  "MongoHost":"192.168.4.166",
+  "MqUserName":"guest",
+  "MqPassWord":"guest",
+  "MongoPort":27018
+}

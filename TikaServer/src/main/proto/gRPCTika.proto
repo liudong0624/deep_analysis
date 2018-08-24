@@ -1,0 +1,43 @@
+syntax = "proto3";
+option java_multiple_files = true;
+//java打包路径
+option java_package = "io.grpc.grpctika";
+option java_outer_classname = "gRPCTikaProto";
+option objc_class_prefix = "LDD";
+package grpctika;
+
+// 定义服务
+service Tika {
+    // Sends a greeting
+    rpc gRPCTikaParseToString (Value) returns (ParseResult) {}
+    rpc gRPCDetect(Value) returns (Typestring) {}
+    rpc gRPCParseEmbedded(Value) returns (EmbeddedList) {}
+    }
+// 定义类型
+  message Value {
+    bytes doctment = 1;
+    string password = 2;
+    string url = 3;
+    string md5 = 4;
+    }
+
+message ParseResult {
+    string content = 1;
+    string meta = 2;
+    string exception = 3;
+}
+
+message Typestring{
+    string type = 1;
+    string exception = 2;
+}
+
+message EmbeddedFile{
+    string filename = 1;
+    bytes filecontent = 2;
+}
+
+message EmbeddedList{
+    repeated EmbeddedFile items=1;
+    string exception = 2;
+}
